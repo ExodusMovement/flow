@@ -204,6 +204,8 @@ for (var i = 0; i < sources.length; i++) {
 function transformAndOutput(content, outFile, source) {
   var fileName = source || '<stdin>';
   var result = transformSource(content, fileName);
+  if (result === undefined) return
+
   var code = result.toString();
 
   if (sourceMaps) {
@@ -266,8 +268,6 @@ function transformSource(content, filepath) {
         '   \033[90m' + line + ':  \033[0m' +
         text.slice(0, col) + '\033[7;31m' + text[col] + '\033[0m' + text.slice(col + 1) + '\n'
       );
-      process.exit(1);
     }
-    throw error;
   }
 }
